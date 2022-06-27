@@ -1,14 +1,5 @@
-// Require the necessary discord.js classes
-import { Client, Intents } from 'discord.js';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const { CLIENT_ID, GUILD_ID, DISCORD_TOKEN } = process.env;
-
-if (!CLIENT_ID || !GUILD_ID || !DISCORD_TOKEN) {
-  throw new Error('Missing environment variables');
-}
+import { Client, Intents, Interaction } from 'discord.js';
+import { config } from './config';
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -18,5 +9,7 @@ client.once('ready', () => {
   console.log('Ready!');
 });
 
+client.on('interactionCreate', async (interaction: Interaction) => {});
+
 // Login to Discord with your client's token
-client.login(DISCORD_TOKEN);
+client.login(config.DISCORD_TOKEN);
